@@ -81,7 +81,14 @@ p<-ggplot(data = santander) +
 
 
 p
-animate(p, renderer = ffmpeg_renderer())
+
+#Manual
+p<-ggplot(data = santander) +
+  geom_sf() +
+  geom_point(data = data_limpia, aes(x = longitud, y = latitud), color = "red") +
+  coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
+  labs(title = 'Fecha: {frame}') +
+  transition_manual(Fecha)
 
 p
 # Save at gif:
