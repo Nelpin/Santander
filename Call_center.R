@@ -76,7 +76,7 @@ p<-ggplot(data = santander) +
   geom_point(data = data_limpia, aes(x = longitud, y = latitud), color = "red") +
   coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
   labs(title = 'Fecha: {closest_state}') +
-  transition_states(Fecha,transition_length = 1, state_length = 1)  + 
+  transition_states(Fecha,transition_length = 0)  + 
   shadow_mark(size = 1, colour = 'grey')
 
 
@@ -87,8 +87,17 @@ p<-ggplot(data = santander) +
   geom_sf() +
   geom_point(data = data_limpia, aes(x = longitud, y = latitud), color = "red") +
   coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
-  labs(title = 'Fecha: {frame}') +
+  labs(title = 'Fecha: {Fecha}') +
   transition_manual(Fecha)
+
+p
+
+p<-ggplot(data = santander) +
+  geom_sf() +
+  geom_point(data = data_limpia, aes(x = longitud, y = latitud), color = "red") +
+  coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
+  labs(title = 'Fecha: {frame_time}') +
+  transition_reveal(Fecha)
 
 p
 # Save at gif:
