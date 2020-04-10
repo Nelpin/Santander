@@ -66,10 +66,24 @@ p<-ggplot(data = santander) +
   coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
   labs(title = 'Fecha: {frame_time}') +
   transition_time(Fecha) +
-  shadow_mark(alpha = 0.3, size = 0.5)
+  ease_aes('linear')
 
 p
 
+# Otra forma
+p<-ggplot(data = santander) +
+  geom_sf() +
+  geom_point(data = data_limpia, aes(x = longitud, y = latitud), color = "red") +
+  coord_sf(xlim = c(-75, -72), ylim = c(5, 9), expand = FALSE)+
+  labs(title = 'Fecha: {closest_state}') +
+  transition_states(Fecha,transition_length = 1, state_length = 1)  + 
+  shadow_mark(size = 1, colour = 'grey')
+
+
+p
+animate(p, renderer = ffmpeg_renderer())
+
+p
 # Save at gif:
 anim_save("mapa_santander.gif")
 
